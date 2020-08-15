@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
     <!-- Custom Css -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
@@ -16,34 +18,65 @@
     <!-- Image and text -->
     <nav class="navbar navbar-light container">
         <a class="navbar-brand" href="#">
-            <!-- <img src="{% static 'images/grader.jpeg' %}" width="50" height="50" class="d-inline-block align-top" alt=""> -->
             <span class="brand-text">Grader</span>
         </a>
     </nav>
+
     <span id="dataBank" csrf="{{ csrf_token }}" process-url="{% url 'process' %}"  class="d-none"></span>
-    <main class="main container mt-6">
-    <h5 >Relax, just calculate your grade</h5>
-    <form id="form">
-    <table class="table table-borderless order-list table-responsive">
-    <thead>
-        <tr>
-        <th scope="col">Course Name</th>
-        <th scope="col">Score (%)</th>
-        <th scope="col">Units</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><input class="courseName1" name="courseName1" type="text" /></td>
-            <td><input class="courseScore1" name="courseScore1" type="number" /></td>
-            <td><input class="courseUnit1" name="courseUnit1" type="number" /></td>
-        </tr>
-    </tbody>
-    </table>
-    <a class="submit">Submit</a>
-    <button class="addRow">Add Row</button>
-    </form>
-    </main>
+
+    <div class="main__section container">
+    <p class="form__caption">Relax! calculate your grade point, by simply filling the form</p>
+    <div class="content col-sm-7 col-12 card pt-4 pb-4">
+      <form id="form">
+        <table class="table table-borderless order-list table-responsive">
+        <thead>
+            <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Score</th>
+            <th scope="col">Units</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input class="form-control courseName1" name="courseName1" type="text" placeholder="MTH101" /></td>
+                <td><input class="form-control courseScore1" name="courseScore1" type="number" placeholder="90%" /></td>
+                <td><input class="form-control courseUnit1" name="courseUnit1" type="number" placeholder="2" /></td>
+            </tr>
+        </tbody>
+        </table>
+        <a class="addIcon addRow" ><i class="fas fa-plus pr-1"></i>add</a><br/>
+        <span class="btn__wrap">
+          <a class="btn submit submit__btn">Calculate</a>
+        </span>
+      </form>
+      <div class="result__section">
+      <p class="result__header">Result</p>
+      <table class="table table-borderless order-list table-responsive">
+        <thead>
+            <tr>
+            <th scope="col">Course</th>
+            <th scope="col">Score</th>
+            <th scope="col">Units</th>
+            <th scope="col">Points</th>
+            <th scope="col">Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                
+            </tr>
+        </tbody>
+        </table>
+
+        <div>
+          <p class="totals">Total Units: <strong id="totalUnits"></strong></p>
+          <p class="totals">Total Points: <strong id="totalPoints"></strong></p>
+          <p class="totals">GP: <strong id="gp"></strong></p>
+        </div>
+
+      </div>
+    </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

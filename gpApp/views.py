@@ -28,7 +28,9 @@ def DataProcessView(request):
             data_arr.append({
                 'name': course.get('courseName'),
                 'grade': calc.get('grade'),
-                'course_points': course_points
+                'points': course_points,
+                'units': course.get('courseUnits'),
+                'score': course.get('courseScore')
             })
 
         gp = total_points/total_units

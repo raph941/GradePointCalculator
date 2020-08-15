@@ -46,5 +46,8 @@ def getPoints(score):
             'grade': 'A'
         }
     else:
-        pass
+        return {
+            'points': 0.0,
+            'grade': 'F'
+        }
 

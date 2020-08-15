@@ -4,13 +4,13 @@ $(document).ready(function () {
     $(".addRow").click(function (e) {
         e.preventDefault()
         counter++
-        var newRow = $("<tr>");
+        var newRow = $('<tr class="inputRow">');
         var cols = "";
 
         cols += '<td><input type="text" class="form-control courseName' + counter + '" name="courseName' + counter + '"/></td>';
-        cols += '<td><input type="text" class="form-control courseScore' + counter + '" name="courseScore' + counter + '"/></td>';
-        cols += '<td><input type="text" class="form-control courseUnit' + counter + '" name="courseUnit' + counter + '"/></td>';
-        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+        cols += '<td><input type="number" class="form-control courseScore' + counter + '" placeholder="90%" name="courseScore' + counter + '"/></td>';
+        cols += '<td><input type="number" class="form-control courseUnit' + counter + '" placeholder="2" name="courseUnit' + counter + '"/></td>';
+        cols += '<td class="p-0"><i class="fas fa-times ibtnDel"></i></td>';
 
         newRow.append(cols);
         $("table.order-list").append(newRow);
@@ -41,6 +41,7 @@ $(document).ready(function () {
 
     $('.submit').click(function(e){
         e.preventDefault
+        $('.btn__wrap').html('<a class="btn submit submit__btn bg-white ml-2" id="loading"></a>')
         let data = JSON.stringify($('form').serializeArray())
 
         $.ajax({
@@ -52,7 +53,31 @@ $(document).ready(function () {
             },
 
             success: function(data){
-                console.log(data)
+
+                $('#form').remove()
+                $('.result__section').show()
+                $('.inputRow').hide()
+
+                data.courses.forEach(data => {
+                    var resultRow = $('<tr class="resultRow">');
+                    var cols = "";
+                    console.log(data)
+
+                    cols += '<td>' + data.name + '</td>';
+                    cols += '<td>' + data.score + '</td>';
+                    cols += '<td>' + data.units + '</td>';
+                    cols += '<td>' + data.points + '</td>';
+                    cols += '<td>' + data.grade + '</td>';
+
+                    resultRow.append(cols);
+                    $("table.order-list").append(resultRow);
+                })
+
+                $('#totalUnits').html(data.total_units)
+                $('#totalPoints').html(data.total_points)
+                $('#gp').html(data.gp)
+
+                
             }
         })
     })
