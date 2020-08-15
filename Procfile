@@ -1,1 +1,1 @@
-web: gunicorn djangoTemplate.wsgi --log-file -
+web: gunicorn GradePoint.wsgi --log-file -
